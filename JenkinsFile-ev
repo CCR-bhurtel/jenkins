@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    environment {
+        DISABLE_AUTH ='true'
+        DB_ENGINE = 'mongodb'
+    }
+
+    stages {
+        stage('Build'){
+            steps {
+                echo "Database engine is ${DB_ENGINE}"
+                echo "Is auth disabled? ${DISABLE_AUTH}"
+                sh 'printenv'
+            }
+        }
+    }
+}
