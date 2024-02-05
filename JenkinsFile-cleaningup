@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('No-op'){
+            steps {
+                sh 'ls'
+            }
+        }
+        
+        post {
+            always {
+                echo 'One way another, I have finished'
+                deleteDir() /* This will cleanup the workspace */
+            }
+            success {
+                echo 'Pipeline succeeded!'
+            }
+
+            failure {
+                echo 'Pipeline failed'
+            }
+        }
+    }
+}
