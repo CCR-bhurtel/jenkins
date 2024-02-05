@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('No-op'){
+            steps {
+                sh 'ls'
+            }
+        }
+    }
+        post {
+            always {
+                echo 'One way another, I have finished'
+                deleteDir() /* This will cleanup the workspace */
+            }
+            success {
+                mail to: 'bhurtelshishir@gmail.com'
+                     subject: "Pipeline succeed: ${currentBuild.fullDisplayName}"
+                     body: "Something is wrong with ${env.BUILD_URL}"
+            }
+
+            failure {
+                echo 'Pipeline failed'
+            }
+        }
+
+}
