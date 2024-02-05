@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+    options {
+        skipStagesAfterUnstable()
+    }
+    stages {
+        stage('Setup'){
+            steps {
+                echo "Setting up..."
+            }
+        }
+        stage('Test'){
+            steps {
+                echo 'Started testing'
+                unstable( message: "Forcibly making the testing stage unstable")
+            }
+        }
+        
+        stage('Build'){
+            steps{
+                echo 'Building the bundle ....'
+            }
+        }
+    }
+    
+    post {
+        unstable {
+            echo 'The pipeline was unstable'
+        }
+    }
+}
