@@ -14,9 +14,9 @@ pipeline {
                 deleteDir() /* This will cleanup the workspace */
             }
             success {
-                mail to: 'bhurtelshishir@gmail.com'
-                     subject: "Pipeline succeed: ${currentBuild.fullDisplayName}"
-                     body: "Something is wrong with ${env.BUILD_URL}"
+                mail to: 'bhurtelshishir@gmail.com',
+                     subject: "Pipeline succeed: ${currentBuild.fullDisplayName}",
+                     body: "The pipeline ${env.BUILD_URL} was successfully buil"
             }
 
             failure {
